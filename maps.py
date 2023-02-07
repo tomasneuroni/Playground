@@ -9,7 +9,7 @@ def get_address_info(address):
     return data
 
 def main():
-    address = input("Enter an address in DC: ")
+    address = input("Enter an address for it's coordinates: ")
     print("Loading information...")
     print("🕐")
     time.sleep(1)
