@@ -2,14 +2,14 @@ import requests
 import time
 
 def get_address_info(address):
-    API_KEY = "GOOGLE MAPS API KEY HERE"
+    API_KEY = "API-KEY-GOOGLE-MAPS"
     API_URL = f"https://maps.googleapis.com/maps/api/geocode/json?address={address}&key={API_KEY}"
     response = requests.get(API_URL)
     data = response.json()
     return data
 
 def main():
-    address = input("Enter an address to locate it's coordinates: ")
+    address = input("Enter an address in DC: ")
     print("Loading information...")
     print("🕐")
     time.sleep(1)
