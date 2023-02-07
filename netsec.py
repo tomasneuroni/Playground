@@ -2,6 +2,7 @@ import socket
 import nmap
 import time
 import sys
+import whois
 
 def audit_network(host, ports):
     # Use the nmap library to perform a scan on the target host and specified ports
@@ -10,8 +11,9 @@ def audit_network(host, ports):
 
     # Check the status of each port and keep track of open ports
     open_ports = []
+    print(f'\nPorts for {host}:')
     for port in nm[host].all_tcp():
-        if nm[host].tcp(port)['state'] == 'open':
+        if nm[host]['tcp'][port]['state'] == 'open':
             open_ports.append(port)
             print(f'🔓 Port {port} is open.')
         else:
@@ -24,7 +26,13 @@ def audit_network(host, ports):
         print('\n💡 Network security is average. Some open ports were found.')
     else:
         print('\n🚨 Network is not secure! Several open ports were found.')
-
+        
+    # Get information about the network IP address
+    ip_address = socket.gethostbyname(host)
+    print(f'\nIP address of {host}: {ip_address}')
+    w = whois.whois(ip_address)
+    print(f'\nWHOIS data for {ip_address}:\n{w}')
+    
 # Example usage with a scanning animation
 def example_usage():
     host = '127.0.0.1'
